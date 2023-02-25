@@ -1,4 +1,4 @@
-using F76CIG;
+﻿using F76CIG;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -183,10 +183,15 @@ void SaveFile(BaseMaterialFile file, string path, string category)
     if (consoleDebug) Console.WriteLine($"Saving {Path.GetFileName(path)}");
     string color = dictCategory[category][0].Replace("#", ""); // Just in case, remove '#'
     if (color.Length != 6) color = "FF00FF"; // If something is wrong - set purple color
-    if (!float.TryParse(dictCategory[category][1], out float emit)) { Console.WriteLine($"ERROR 'Emittance Multiplier' in category '{category}' is invalid, using default '0.20000'"); emit = 0.20000f; }
-    if (!float.TryParse(dictCategory[category][2], out float expo)) { Console.WriteLine($"ERROR 'Adaptive Exposure Offset' in category '{category}' is invalid, using default '0.20000'"); expo = 0.20000f; }
-    string texture = dictCategory[category][3] + ".dds";
-    if (!File.Exists(dirTextures + texture)) { Console.WriteLine($"ERROR 'Texture' in category '{category}' is invalid, using default 'glow_white'"); texture = "glow_white.dds"; }
+
+    // Fetch Emittance Multiplier
+    bool parseSuccess = float.TryParse(dictCategory[category][1], NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out float emit);
+    if (!parseSuccess) { Console.WriteLine($"ERROR 'Emittance Multiplier' in category '{category}' is invalid, using default '0.20000'"); emit = 0.20000f; }
+    
+    // Fetch Adaptive Exposure Offset
+    parseSuccess = float.TryParse(dictCategory[category][2], NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out float expo);
+    if (!parseSuccess) { Console.WriteLine($"ERROR 'Adaptive Exposure Offset' in category '{category}' is invalid, using default '0.00'"); expo = 0.00f; }
+    
     // Fetch Texture
     // use same texture as diffuse if "diffuse"
     string texture = null;
