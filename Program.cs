@@ -1,4 +1,4 @@
-﻿using F76CIG;
+using F76CIG;
 using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.Serialization.Json;
@@ -192,14 +192,20 @@ void SaveFile(BaseMaterialFile file, string path, string category)
     bgsm.EmitEnabled = true;
     bgsm.EmittanceColor = (uint)ColorTranslator.FromHtml("#" + color).ToArgb();
     bgsm.EmittanceMult = emit;
-    bgsm.ExternalEmittance = false;
-    bgsm.LumEmittance = 0.00000f;
-    bgsm.UseAdaptativeEmissive = true;
-    bgsm.AdaptativeEmissive_ExposureOffset = expo;
-    bgsm.AdaptativeEmissive_FinalExposureMin = expo;
-    bgsm.AdaptativeEmissive_FinalExposureMax = expo;
+
+    // do not change other emittance params if expo is 0
+    if (expo > 0) {
+        bgsm.ExternalEmittance = false;
+        bgsm.LumEmittance = 0.00000f;
+        bgsm.UseAdaptativeEmissive = true;
+        bgsm.AdaptativeEmissive_ExposureOffset = expo;
+        bgsm.AdaptativeEmissive_FinalExposureMin = expo;
+        bgsm.AdaptativeEmissive_FinalExposureMax = expo;
+    }
+    
     bgsm.Glowmap = true;
     bgsm.Tree = false; // Fix razorgrain and other plants
+
     // Saving BGSM file
     try
     {
