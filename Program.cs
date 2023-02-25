@@ -1,6 +1,7 @@
 using F76CIG;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Runtime.Serialization.Json;
 
 bool consoleDebug = false;
@@ -186,9 +187,20 @@ void SaveFile(BaseMaterialFile file, string path, string category)
     if (!float.TryParse(dictCategory[category][2], out float expo)) { Console.WriteLine($"ERROR 'Adaptive Exposure Offset' in category '{category}' is invalid, using default '0.20000'"); expo = 0.20000f; }
     string texture = dictCategory[category][3] + ".dds";
     if (!File.Exists(dirTextures + texture)) { Console.WriteLine($"ERROR 'Texture' in category '{category}' is invalid, using default 'glow_white'"); texture = "glow_white.dds"; }
+    // Fetch Texture
+    // use same texture as diffuse if "diffuse"
+    string texture = null;
+    if (dictCategory[category][3] != "diffuse") {
+        texture = dictCategory[category][3] + ".dds";
+        if (!File.Exists(dirTextures + texture)) { Console.WriteLine($"ERROR 'Texture' in category '{category}' is invalid, using default 'same as diffuse'"); texture = null; }
+    }
+    
     // Editing BGSM params
     BGSM bgsm = (BGSM)file;
+
+    if (texture == null) texture = bgsm.DiffuseTexture; // use same texture as diffuse if "diffuse" or texture not found
     bgsm.GlowTexture = texture;
+
     bgsm.EmitEnabled = true;
     bgsm.EmittanceColor = (uint)ColorTranslator.FromHtml("#" + color).ToArgb();
     bgsm.EmittanceMult = emit;
