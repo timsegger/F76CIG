@@ -1,90 +1,90 @@
 ﻿// INSTRUCTION:
 // 1st line: "-- Name of Your Category", for example "-- weapons"
 // 2nd line: "Hex Color Code", for example "00FF00" for bright green or "FF0000" for bright red
-// 3rd line: "Emittance Multiplier", backlight transparency, by default "0.10000"
-// 4th line: "Adaptive Exposure Offset", brightness, increase the value to make the glow brighter, by default "0.20000"
-// 5th line: "Texture", texture name without ".dds", for example "glow_wave" (draw the waves in paint and save the texture)
+// 3rd line: "Emittance Multiplier", backlight transparency, by default "1.50000"
+// 4th line: "Adaptive Exposure Offset", brightness, increase the value to make the glow brighter, by default "0.00000"
+// 5th line: "Texture", texture name without ".dds", for example "glow_wave" (draw the waves in paint and save the texture), alternatively "diffuse" to use diffuse texture for glow
 
 -- holotapes
 00FFFF
-0.10000
-0.20000
-glow_white
+1.50000
+0.00000
+diffuse
 
 -- keys_keycards
 00FFFF
-0.10000
-0.20000
-glow_white
+1.50000
+0.00000
+diffuse
 
 -- gun_mods
-FF0000
-0.10000
-0.20000
-glow_white
+FF00FF
+1.50000
+0.00000
+diffuse
 
 -- notes_magazines
-FFFF00
-0.10000
-0.20000
-glow_white
+00FF00
+1.50000
+0.00000
+diffuse
 
 -- valuable_items
-FFFF00
-0.10000
-0.20000
-glow_white
+00FF00
+1.50000
+0.00000
+diffuse
 
 -- quest_items
-FFFF00
-0.10000
-0.20000
-glow_white
+00FF00
+1.50000
+0.00000
+diffuse
 
 -- rare_items
 FFFF00
-0.10000
-0.20000
-glow_white
+1.50000
+0.00000
+diffuse
 
 -- meds
-00FF00
-0.10000
-0.20000
-glow_white
+FFA500
+1.50000
+0.00000
+diffuse
 
 -- ammo
-FF0000
-0.10000
-0.30000
-glow_white
+FFFF00
+1.50000
+0.00000
+diffuse
 
 -- plants
 00FF00
-0.10000
-0.20000
-glow_plants
+1.50000
+0.00000
+diffuse
 
 -- minerals_ore
 0000FF
-0.10000
-0.40000
-glow_white
+1.50000
+0.00000
+diffuse
 
 -- food_drinks
-00FF00
-0.10000
-0.20000
-glow_white
+FFA500
+1.50000
+0.00000
+diffuse
 
 -- enemy_drop
 FF0000
-0.10000
-0.20000
-glow_white
+1.50000
+0.00000
+diffuse
 
 -- containers
 FFFFFF
-0.10000
-0.30000
-glow_white
+1.50000
+0.00000
+diffuse
